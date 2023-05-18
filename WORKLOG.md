@@ -1,22 +1,23 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Tedd Lee
 
-### date x
+## date 05-17-2023
 
-info
+Found this really useful link to understand how it works; Listed here:
+* https://gist.github.com/roachhd/dce54bec8ba55fb17d3a
 
-### date y
+## date 05-18-2023
 
-info
+Absent from class was not able to do work IN class due to AP mando exam.
 
 
-## GROUP MEMBER 2
+## Eduardo Lozano
 
-### date x
+### date 05-17-2023
 
-info
+Don't really understand javascript or brainfuck so I had to read the links tedd provided
 
-### date y
+### date 05-18-2023
 
-info
+Started implemnting an interpreter for reading brain fuck code. Realized that making a compiler for a langauge may be harder than expected.
