@@ -1,15 +1,14 @@
 //consts
 const CANVAS_HEIGHT = 200;
-const CELL_SIZE = 70;
-const CELL_SEPARATION = 100;
 
 //vars
 var cells = [];
 var pointer = 2; //testing: starts at middle cell
 var cellsX;
-var brackets = [];
+var loops = [];
 
 var code = []
+var index = 0
 var input = []
 var output = ''
 
@@ -26,13 +25,12 @@ function setup() {
   
   //just as a test
   for (let i = 0; i < 5; i++) {
-    cells.push(0)
+    cells.push(new Cell())
   }
   
   code = '[++[>++<-].'.split('')
   print(code);
 }//setup
-
 
 function draw() {
   //draw is run continuously throughout the program.
@@ -41,26 +39,23 @@ function draw() {
   //used to test transitions
   cellsX += (mouseX - pointer*CELL_SEPARATION - cellsX) * 0.25
   
-  //draw all the cells but like its just one rn
+  
+  //draw all the cells but like its just *actually five* rn
   for (let i = 0; i < cells.length; i++) {
     cell = cells[i]
     
     //calculate x based on index and a more general x (allows for smooth transitions)
     let sqx = cellsX + i*CELL_SEPARATION - CELL_SIZE/2
-    
-    //colors
-    noStroke()
-    fill('#915012')
-    
+        
     //draw square
-    square(sqx, height/2-CELL_SIZE/2, CELL_SIZE, 15)
+    cell.display(sqx);
   }
   
 }//draw
 
 function keyPressed() {
   if (parseInt(key) < 5) {
-    pointer = parseInt(key)
+    pointer = parseInt(key);
   }
 } 
 
