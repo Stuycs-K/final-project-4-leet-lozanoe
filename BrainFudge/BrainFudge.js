@@ -38,15 +38,15 @@ function draw() {
   //draw is run continuously throughout the program.
   background('#301c08')
   
-  //used to test
-  cellsX = mouseX
+  //used to test transitions
+  cellsX += (mouseX - pointer*CELL_SEPARATION - cellsX) * 0.25
   
   //draw all the cells but like its just one rn
   for (let i = 0; i < cells.length; i++) {
     cell = cells[i]
     
     //calculate x based on index and a more general x (allows for smooth transitions)
-    let sqx = cellsX + (i - pointer)*CELL_SEPARATION - CELL_SIZE/2
+    let sqx = cellsX + i*CELL_SEPARATION - CELL_SIZE/2
     
     //colors
     noStroke()
@@ -58,6 +58,11 @@ function draw() {
   
 }//draw
 
+function keyPressed() {
+  if (parseInt(key) < 5) {
+    pointer = parseInt(key)
+  }
+} 
 
 function windowResized() {
   resizeCanvas(windowWidth, CANVAS_HEIGHT);
