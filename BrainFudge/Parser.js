@@ -12,6 +12,9 @@ function parse(ch) {
   if (charcter === "-") {
     cells[pointer]--;
   }
+  
+  
+  
   if (ch === "[") {
     loops.push(pointer);
     //WILL FIGURE OUT LOGIC

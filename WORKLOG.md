@@ -15,7 +15,9 @@ Worked on UI and began implementing the cell visualization.
 
 Began adding basic cell animation.
 
+### 05-20-2023
 
+Added more methods to the Cell class and added Inconsolata font.
 
 ## Eduardo Lozano
 
@@ -28,3 +30,7 @@ Don't really understand javascript or brainfuck so I had to read the links Tedd 
 Started implemnting an interpreter for reading brain fuck code. Realized that making a compiler for a langauge may be harder than expected.
 
 ### 05-19-2023
+
+Implemented the Cell class and wrote display method.
+
+### 05-20-2023

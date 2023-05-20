@@ -12,6 +12,13 @@ var index = 0
 var input = []
 var output = ''
 
+//fonts
+var inconsolata
+
+function preload() {
+  inconsolata = loadFont('assets/Inconsolata-Regular.ttf')
+}
+
 function setup() {
   //setup is run once at the beginning of the sketch.
   
@@ -45,7 +52,7 @@ function draw() {
     cell = cells[i]
     
     //calculate x based on index and a more general x (allows for smooth transitions)
-    let sqx = cellsX + i*CELL_SEPARATION - CELL_SIZE/2
+    let sqx = cellsX + i*CELL_SEPARATION
         
     //draw square
     cell.display(sqx);
