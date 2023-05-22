@@ -4,14 +4,17 @@ const MAX_CELLS = 30000;
 
 //vars
 var cells = [];
-var pointer = 2; //testing: starts at middle cell
+var pointer = 0;
 var cellsX;
 var loops = [];
 
 var code = []
 var index = 0
 var input = []
-var output = ''
+var output = '';
+
+//test const
+const INIT_CELLS = 20;
 
 //fonts
 var inconsolata
@@ -29,12 +32,14 @@ function setup() {
   
   //move canvas to middle of screen
   canvas = select('canvas')
-  canvas.position(0, windowHeight/2-height/2)
+  canvas.position(0, 200)
   
   //just as a test
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < INIT_CELLS; i++) {
     cells.push(new Cell())
   }
+  //sets pointer to middle cell
+  pointer = floor(INIT_CELLS/2)
   
   code = '[++[>++<-].'.split('')
   print(code);
@@ -66,7 +71,7 @@ function draw() {
     if (i == pointer) {
       cell.alpha += (255 - cell.alpha)*0.25
     } else {
-      cell.alpha += (max(125 - 20*sq(abs(i-pointer)), 0) - cell.alpha)*0.25
+      cell.alpha += (max(180 - 30*abs(i-pointer), 0) - cell.alpha)*0.25
     }
     
     //draw square
@@ -76,13 +81,16 @@ function draw() {
 }//draw
 
 function keyPressed() {
-  if (parseInt(key) < 5) {
-    pointer = parseInt(key);
+  if (key == 'd') {
+    pointer++
   } 
-  if (keyCode == UP_ARROW) {
+  if (key == 'a') {
+    pointer--
+  }
+  if (key == 'w') {
     cells[pointer].incr();
   }
-  if (keyCode == DOWN_ARROW) {
+  if (key == 's') {
     cells[pointer].decr();
   }
 } 

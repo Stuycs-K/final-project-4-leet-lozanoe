@@ -4,7 +4,7 @@ const CELL_SEPARATION = 100;
 function Cell() {
   this.value = 0
   this.size = CELL_SIZE
-  this.alpha = 255
+  this.alpha = 0
   
   this.incr = () => {
     this.value++
@@ -23,12 +23,19 @@ function Cell() {
   }
   
   
-  this.display = (x) => {    
+  this.display = (x) => { 
+    if (x < -this.size/2 || x > width + this.size/2) {
+      return
+    }
+    if (round(this.alpha) == 0) {
+      return
+    }
+    
     noStroke()
     fill(145, 80, 18, this.alpha)
     square(x-this.size/2, height/2-this.size/2, this.size, 15)
     
-    fill(255)
+    fill(255, this.alpha)
     textFont(inconsolata, 28)
     textAlign(CENTER, BASELINE)
     text(this.value, x, height/2+7) //+7 for visual center of square
