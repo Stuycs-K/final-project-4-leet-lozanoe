@@ -19,11 +19,15 @@ Began adding basic cell animation.
 
 Added more methods to the Cell class and added Inconsolata font.
 
+### 05-22-2023
+
+Added transparency and size animation, fixed negative wraparound in cells, expanded testing functionality.
+
 ## Eduardo Lozano
 
 ### 05-17-2023
 
-Don't really understand javascript or brainfuck so I had to read the links Tedd provided
+Don't really understand javascript or brainfuck so I had to read the links Tedd provided.
 
 ### 05-18-2023
 
@@ -33,4 +37,6 @@ Started implemnting an interpreter for reading brain fuck code. Realized that ma
 
 Implemented the Cell class and wrote display method.
 
-### 05-20-2023
+### 05-22-2023
+
+Was out sick.
