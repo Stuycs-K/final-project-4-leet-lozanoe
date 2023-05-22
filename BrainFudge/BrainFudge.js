@@ -1,5 +1,6 @@
 //consts
 const CANVAS_HEIGHT = 200;
+const MAX_CELLS = 30000;
 
 //vars
 var cells = [];
@@ -51,9 +52,23 @@ function draw() {
   for (let i = 0; i < cells.length; i++) {
     cell = cells[i]
     
-    //calculate x based on index and a more general x (allows for smooth transitions)
+    //cell x animation
     let sqx = cellsX + i*CELL_SEPARATION
         
+    //cell size animation
+    if (i == pointer) {
+      cell.size += (CELL_SIZE * 1.25 - cell.size)*0.25
+    } else {
+      cell.size += (CELL_SIZE - cell.size)*0.25
+    }
+    
+    //cell transparency animation
+    if (i == pointer) {
+      cell.alpha += (255 - cell.alpha)*0.25
+    } else {
+      cell.alpha += (max(125 - 20*sq(abs(i-pointer)), 0) - cell.alpha)*0.25
+    }
+    
     //draw square
     cell.display(sqx);
   }
@@ -63,6 +78,12 @@ function draw() {
 function keyPressed() {
   if (parseInt(key) < 5) {
     pointer = parseInt(key);
+  } 
+  if (keyCode == UP_ARROW) {
+    cells[pointer].incr();
+  }
+  if (keyCode == DOWN_ARROW) {
+    cells[pointer].decr();
   }
 } 
 
