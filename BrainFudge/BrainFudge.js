@@ -2,16 +2,22 @@
 const CANVAS_HEIGHT = 200;
 const MAX_CELLS = 30000;
 
-//vars
-var cells = [];
-var pointer = 0;
+// visuals
+var output = '';
 var cellsX;
-var loops = [];
 
+//Brainfudge converter stuff
+var loops = [];
 var code = []
 var index = 0
 var input = []
-var output = '';
+var cells = [];
+var pointer = 0;
+
+//input
+var runButt;
+var exitButt;
+var codeInput;
 
 //test const
 const INIT_CELLS = 20;
@@ -22,13 +28,20 @@ var inconsolata
 function preload() {
   inconsolata = loadFont('assets/Inconsolata-Regular.ttf')
 }
-
 function setup() {
+ 
   //setup is run once at the beginning of the sketch.
   
   //make canvas
   createCanvas(windowWidth, CANVAS_HEIGHT)
   cellsX = width/2
+  
+  //making butts
+  runButt = createButton("RUN");
+  runButt.position(width / 2,50);
+  exitButt = createButton("EXIT");
+  exitButt.position(width/2 + 50,50);
+  print(width/2);
   
   //move canvas to middle of screen
   canvas = select('canvas')
