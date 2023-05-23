@@ -1,0 +1,13 @@
+body {
+    background-color: #37200a;
+    padding: 0;
+    margin: 0;
+}
+
+input {
+    border: none;
+}
+
+input:focus-visible {
+    outline: none;
+  }
