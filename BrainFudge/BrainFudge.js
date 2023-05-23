@@ -41,7 +41,6 @@ function setup() {
   runButt.position(width / 2,50);
   exitButt = createButton("EXIT");
   exitButt.position(width/2 + 50,50);
-  print(width/2);
   
   //move canvas to middle of screen
   canvas = select('canvas')
