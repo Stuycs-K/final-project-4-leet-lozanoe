@@ -29,7 +29,6 @@ function preload() {
   inconsolata = loadFont('assets/Inconsolata-Regular.ttf')
 }
 function setup() {
- 
   //setup is run once at the beginning of the sketch.
   
   //make canvas
@@ -38,9 +37,18 @@ function setup() {
   
   //making butts
   runButt = createButton("RUN");
-  runButt.position(width / 2,50);
+  runButt.position(width/2, 160);
   exitButt = createButton("EXIT");
-  exitButt.position(width/2 + 50,50);
+  exitButt.position(width/2+50, 160);
+  
+  codeInput = createInput('');
+  codeInput.attribute('placeholder', 'insert valid BrainFuck code')
+  //DO NOT change the order of these please :(
+  codeInput.size(width*6/7)
+  codeInput.style('padding', '15px 20px')
+  codeInput.position(width/2-codeInput.size().width/2, CANVAS_HEIGHT/2-(codeInput.size().height+2*15)/2) //replace 15 with first padding value
+  codeInput.style('font-size', '40px')
+  
   
   //move canvas to middle of screen
   canvas = select('canvas')

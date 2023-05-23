@@ -23,6 +23,10 @@ Added more methods to the Cell class and added Inconsolata font.
 
 Added transparency and size animation, fixed negative wraparound in cells, expanded testing functionality.
 
+### 05-23-2023
+
+Cleaned up the repo. Added Input with pretty CSS and correct font. 
+
 ## Eduardo Lozano
 
 ### 05-17-2023
@@ -40,3 +44,7 @@ Implemented the Cell class and wrote display method.
 ### 05-22-2023
 
 Was out sick.
+
+## 05-23-2023
+
+Added the Run and Exit buttons. Also restructured the global constants and variables.
