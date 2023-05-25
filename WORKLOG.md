@@ -27,6 +27,10 @@ Added transparency and size animation, fixed negative wraparound in cells, expan
 
 Cleaned up the repo. Added Input with pretty CSS and correct font. 
 
+### 05-25-2023
+
+Implemented real-time code parsing and added UI resizing along with canvas.
+
 ## Eduardo Lozano
 
 ### 05-17-2023
@@ -48,3 +52,7 @@ Was out sick.
 ## 05-23-2023
 
 Added the Run and Exit buttons. Also restructured the global constants and variables.
+
+### 05-25-2023
+
+Added syntax checker when the run button is pressed.
