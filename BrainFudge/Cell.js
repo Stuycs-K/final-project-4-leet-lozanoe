@@ -9,10 +9,14 @@ function Cell() {
   this.incr = () => {
     this.value++
     this.value %= 256
+    
+    this.size = CELL_SIZE*1.5
   }
   this.decr = () => {
     this.value--
     this.value = ((this.value % 256) + 256) % 256
+    
+    this.size = CELL_SIZE*0.85
   }
   
   this.ascii = () => {

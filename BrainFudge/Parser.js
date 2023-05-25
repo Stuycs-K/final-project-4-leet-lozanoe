@@ -1,5 +1,5 @@
 
-function parse(ch) {
+function parseOp(ch) {
   if (ch === "<") {
     pointer--;
   }
@@ -7,21 +7,28 @@ function parse(ch) {
     pointer++;
   }
   if (ch === "+") {
-    cells[pointer]++;
+    cells[pointer].incr();
   }
-  if (charcter === "-") {
-    cells[pointer]--;
+  if (ch === "-") {
+    cells[pointer].decr();
   }
   
-  
+  if (ch === ".") {
+    output += cells[pointer].ascii()
+    print(output)
+  }
+  if (ch === ",") {
+    //cells[pointer] = next char of input
+  }
+
   
   if (ch === "[") {
-    loops.push(pointer);
+    loops.push(index);
     //WILL FIGURE OUT LOGIC
   }
   if (ch === "]") {
-    if (cells[pointer]!=0) {
-      pointer = loops[loops.length-1]
+    if (cells[pointer].value != 0) {
+      index = loops[loops.length-1]
     } else {
       loops.pop();
     }

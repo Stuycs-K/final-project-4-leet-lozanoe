@@ -2,19 +2,24 @@
 const CANVAS_HEIGHT = 200;
 const MAX_CELLS = 30000;
 
+const OPS = 20 //operations per second lol
+
 // visuals
+var input = [];
 var output = '';
 var cellsX;
 
-//Brainfudge converter stuff
-var loops = [];
+//Brainfudge converter st
 var code = []
 var index = 0
-var input = []
+
 var cells = [];
 var pointer = 0;
 
-//input
+var loops = []
+var run = false;
+
+//UI
 var runButt;
 var exitButt;
 var codeInput;
@@ -39,10 +44,11 @@ function setup() {
   runButt = createButton("RUN");
   runButt.position(width/2, 160);
   runButt.mouseClicked(() => {
-    let ok = checkInput()
+    code = codeInput.value().split('')
+    let ok = checkInput(code)
     
     if (ok) {
-      //start parsing and live demo
+      run = true;
     } else {
       //show error
     }
@@ -51,8 +57,8 @@ function setup() {
   exitButt = createButton("EXIT");
   exitButt.position(width/2+50, 160);
   
-  codeInput = createInput('');
-  codeInput.attribute('placeholder', 'insert valid BrainFuck code')
+  codeInput = createInput('>++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.');
+  //codeInput.attribute('placeholder', 'insert valid BrainFuck code')
   //DO NOT change the order of these please :(
   codeInput.size(width*6/7)
   codeInput.style('padding', '15px 20px')
@@ -71,16 +77,26 @@ function setup() {
   //sets pointer to middle cell
   pointer = floor(INIT_CELLS/2)
   
-  code = '[++[>++<-].'.split('')
-  print(code);
+  
 }//setup
 
 function draw() {
   //draw is run continuously throughout the program.
   background('#301c08')
+  frameRate(60)
   
-  //used to test transitions
-  cellsX += (mouseX - pointer*CELL_SEPARATION - cellsX) * 0.25
+  //parsing
+  if (run) {
+    if (frameCount % (60/OPS) == 0) {
+      operator = code[index];
+      parseOp(operator)
+
+      index++
+    }
+  }
+  
+  //cell positioning
+  cellsX += (width/2 - pointer*CELL_SEPARATION - cellsX) * 0.25
   
   
   //draw all the cells but like its just *actually five* rn
@@ -127,4 +143,11 @@ function keyPressed() {
 
 function windowResized() {
   resizeCanvas(windowWidth, CANVAS_HEIGHT);
+  
+  runButt.position(width/2, 160)
+  exitButt.position(width/2+50, 160);
+
+  codeInput.size(width*6/7)
+  codeInput.style('padding', '15px 20px')
+  codeInput.position(width/2-codeInput.size().width/2, CANVAS_HEIGHT/2-(codeInput.size().height+2*15)/2) //replace 15 with first padding value
 }//window resize
