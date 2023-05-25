@@ -38,6 +38,16 @@ function setup() {
   //making butts
   runButt = createButton("RUN");
   runButt.position(width/2, 160);
+  runButt.mouseClicked(() => {
+    let ok = checkInput()
+    
+    if (ok) {
+      //start parsing and live demo
+    } else {
+      //show error
+    }
+  });
+  
   exitButt = createButton("EXIT");
   exitButt.position(width/2+50, 160);
   

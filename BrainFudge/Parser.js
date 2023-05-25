@@ -27,3 +27,7 @@ function parse(ch) {
     }
   }
 }
+
+function checkInput() {
+  return true; // false if brackets don't align or something
+}
