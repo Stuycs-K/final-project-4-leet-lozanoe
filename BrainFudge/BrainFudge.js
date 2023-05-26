@@ -94,35 +94,11 @@ function draw() {
       index++
     }
   }
+  //Doing math to display cells
+  renderCells();
   
-  //cell positioning
-  cellsX += (width/2 - pointer*CELL_SEPARATION - cellsX) * 0.25
-  
-  
-  //draw all the cells but like its just *actually five* rn
-  for (let i = 0; i < cells.length; i++) {
-    cell = cells[i]
-    
-    //cell x animation
-    let sqx = cellsX + i*CELL_SEPARATION
-        
-    //cell size animation
-    if (i == pointer) {
-      cell.size += (CELL_SIZE * 1.25 - cell.size)*0.25
-    } else {
-      cell.size += (CELL_SIZE - cell.size)*0.25
-    }
-    
-    //cell transparency animation
-    if (i == pointer) {
-      cell.alpha += (255 - cell.alpha)*0.25
-    } else {
-      cell.alpha += (max(180 - 30*abs(i-pointer), 0) - cell.alpha)*0.25
-    }
-    
-    //draw square
-    cell.display(sqx);
-  }
+  inputText = createInput(width/1*4);
+  outputText = text(width/1*4);
   
 }//draw
 
@@ -143,7 +119,6 @@ function keyPressed() {
 
 function windowResized() {
   resizeCanvas(windowWidth, CANVAS_HEIGHT);
-  
   runButt.position(width/2, 160)
   exitButt.position(width/2+50, 160);
 
