@@ -97,8 +97,9 @@ function draw() {
   //Doing math to display cells
   renderCells();
   
-  inputText = createInput(width/1*4);
-  outputText = text(width/1*4);
+  //I think this breaks the website
+  //inputText = text(width/1*4);
+  //outputText = text(width/1*4);
   
 }//draw
 
