@@ -25,3 +25,15 @@ input:focus-visible {
   color: white;
   opacity: 0.2;
 }
+
+textarea {
+  background-color: #402a16;
+  resize: none;
+  color: white;
+  border: none;
+  font-family: inconsolata, monospace;
+}
+
+textarea:focus-visible {
+  outline: none;
+}

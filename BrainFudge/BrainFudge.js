@@ -1,13 +1,8 @@
 //consts
 const CANVAS_HEIGHT = 200;
 const MAX_CELLS = 30000;
-
+const INIT_CELLS = 20;
 const OPS = 20 //operations per second lol
-
-// visuals
-var input = [];
-var output = '';
-var cellsX;
 
 //Brainfudge converter st
 var code = []
@@ -17,15 +12,21 @@ var cells = [];
 var pointer = 0;
 
 var loops = []
-var run = false;
+var loopStatus; //init, run, pause, forward, back, wait, done
+
+var output = '';
+var input = ''
+var inputPointer = 0;
 
 //UI
 var runButt;
 var exitButt;
 var codeInput;
+var mainInput;
+var outputArea;
 
-//test const
-const INIT_CELLS = 20;
+// visuals
+var cellsX;
 
 //fonts
 var inconsolata
@@ -33,6 +34,7 @@ var inconsolata
 function preload() {
   inconsolata = loadFont('assets/Inconsolata-Regular.ttf')
 }
+
 function setup() {
   //setup is run once at the beginning of the sketch.
   
@@ -42,20 +44,20 @@ function setup() {
   
   //making butts
   runButt = createButton("RUN");
-  runButt.position(width/2, 160);
+  runButt.position(width/2-5-runButt.size().width, 160);
   runButt.mouseClicked(() => {
     code = codeInput.value().split('')
     let ok = checkInput(code)
     
     if (ok) {
-      run = true;
+      loopStatus = 'run'
     } else {
       //show error
     }
   });
   
   exitButt = createButton("EXIT");
-  exitButt.position(width/2+50, 160);
+  exitButt.position(width/2+5, 160);
   
   codeInput = createInput('>++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.');
   //codeInput.attribute('placeholder', 'insert valid BrainFuck code')
@@ -64,6 +66,24 @@ function setup() {
   codeInput.style('padding', '15px 20px')
   codeInput.position(width/2-codeInput.size().width/2, CANVAS_HEIGHT/2-(codeInput.size().height+2*15)/2) //replace 15 with first padding value
   codeInput.style('font-size', '40px')
+  
+  mainInput = createElement('textarea')
+  mainInput.attribute('placeholder', 'input text')
+  mainInput.size((width*6/7-50)/3, 300)
+  mainInput.style('padding', '30px 35px')
+  mainInput.position(width/2-25-mainInput.size().width, CANVAS_HEIGHT+height+50)
+  mainInput.style('font-size', '28px')
+  mainInput.input(() => {
+    input = mainInput.value() //update vars
+  })
+  
+  outputArea = createElement('textarea')
+  outputArea.attribute('placeholder', 'output text')
+  outputArea.attribute('readonly', true)//readonly
+  outputArea.size((width*6/7-50)/3, 300)
+  outputArea.style('padding', '30px 35px')
+  outputArea.position(width/2+25, CANVAS_HEIGHT+height+50)
+  outputArea.style('font-size', '28px')
   
   
   //move canvas to middle of screen
@@ -77,7 +97,7 @@ function setup() {
   //sets pointer to middle cell
   pointer = floor(INIT_CELLS/2)
   
-  
+  loopStatus = 'init'; // starting status
 }//setup
 
 function draw() {
@@ -85,45 +105,42 @@ function draw() {
   background('#301c08')
   frameRate(60)
   
-  //parsing
-  if (run) {
+  //running code
+  if (loopStatus == 'run') {
     if (frameCount % (60/OPS) == 0) {
       operator = code[index];
       parseOp(operator)
 
+      index++ //will be offset in case of 'wait' in parseOp
+    }
+  }
+  if (loopStatus == 'wait') {
+    if (input.length > inputPointer) {
+      operator = code[index];
+      parseOp(operator)
+
+      loopStatus = 'run'
       index++
     }
   }
+  
   //Doing math to display cells
   renderCells();
   
-  //I think this breaks the website
-  //inputText = text(width/1*4);
-  //outputText = text(width/1*4);
-  
 }//draw
-
-function keyPressed() {
-  if (key == 'd') {
-    pointer++
-  } 
-  if (key == 'a') {
-    pointer--
-  }
-  if (key == 'w') {
-    cells[pointer].incr();
-  }
-  if (key == 's') {
-    cells[pointer].decr();
-  }
-} 
 
 function windowResized() {
   resizeCanvas(windowWidth, CANVAS_HEIGHT);
-  runButt.position(width/2, 160)
-  exitButt.position(width/2+50, 160);
+  
+  runButt.position(width/2-5-runButt.size().width, 160)
+  exitButt.position(width/2+5, 160);
 
   codeInput.size(width*6/7)
-  codeInput.style('padding', '15px 20px')
   codeInput.position(width/2-codeInput.size().width/2, CANVAS_HEIGHT/2-(codeInput.size().height+2*15)/2) //replace 15 with first padding value
+  
+  mainInput.size((width*6/7-50)/3, 300)
+  mainInput.position(width/2-25-mainInput.size().width, CANVAS_HEIGHT+height+50)
+  
+  outputArea.size((width*6/7-50)/3, 300)
+  outputArea.position(width/2+25, CANVAS_HEIGHT+height+50)
 }//window resize

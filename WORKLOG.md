@@ -31,6 +31,10 @@ Cleaned up the repo. Added Input with pretty CSS and correct font.
 
 Implemented real-time code parsing and added UI resizing along with canvas.
 
+### 05-29-2023
+
+Added working I/O with pretty text-areas. Also restructured the main loop. Implemented simulation pause if no input is available.
+
 ## Eduardo Lozano
 
 ### 05-17-2023

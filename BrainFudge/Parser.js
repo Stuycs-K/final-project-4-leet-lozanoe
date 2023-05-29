@@ -15,10 +15,16 @@ function parseOp(ch) {
   
   if (ch === ".") {
     output += cells[pointer].ascii()
-    print(output)
+    outputArea.value(output) //update screen UI
   }
   if (ch === ",") {
-    //cells[pointer] = next char of input
+    if (input.length > inputPointer) {
+      cells[pointer].setValue(input.charAt(inputPointer))
+      inputPointer++;
+    } else {
+      loopStatus = 'wait';
+      index--;//to offset index increment in main run loop
+    }
   }
 
   
