@@ -35,6 +35,22 @@ function preload() {
   inconsolata = loadFont('assets/Inconsolata-Regular.ttf')
 }
 
+function setup_cells(){
+  index = 0
+  pointer = 0
+  loopStatus = "init"
+  codeInput.removeAttribute('readonly')
+  
+  //reset cell stuff
+  cells = []
+  for (let i = 0; i < INIT_CELLS; i++) {
+    cells.push(new Cell())
+  }
+  //sets pointer to middle cell
+  pointer = floor(INIT_CELLS/2)
+
+}
+
 function setup() {
   //setup is run once at the beginning of the sketch.
   
@@ -46,6 +62,7 @@ function setup() {
   runButt = createButton("RUN");
   runButt.position(width/2-5-runButt.size().width, 160);
   runButt.mouseClicked(() => {
+    codeInput.attribute('readonly', true)
     code = codeInput.value().split('')
     let ok = checkInput(code)
     
@@ -58,6 +75,7 @@ function setup() {
   
   exitButt = createButton("EXIT");
   exitButt.position(width/2+5, 160);
+  exitButt.mouseClicked(setup_cells);
   
   codeInput = createInput('>++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.');
   //codeInput.attribute('placeholder', 'insert valid BrainFuck code')
@@ -89,15 +107,7 @@ function setup() {
   //move canvas to middle of screen
   canvas = select('canvas')
   canvas.position(0, 200)
-  
-  //just as a test
-  for (let i = 0; i < INIT_CELLS; i++) {
-    cells.push(new Cell())
-  }
-  //sets pointer to middle cell
-  pointer = floor(INIT_CELLS/2)
-  
-  loopStatus = 'init'; // starting status
+  setup_cells()
 }//setup
 
 function draw() {
