@@ -2,24 +2,33 @@
 function parseOp(ch) {
   if (ch === "<") {
     pointer--;
+    if (pointer+offset < 5) {
+      cellsX = width/2 - (pointer+offset+2)*CELL_SEPARATION //makes it visually correct
+      
+      cells.unshift(new Cell());
+      offset++;
+    }
   }
   if (ch === ">") {
     pointer++;
+    if (cells.length/2 - pointer > 5) {
+      cells.push(new Cell());
+    }
   }
   if (ch === "+") {
-    cells[pointer].incr();
+    cells[pointer+offset].incr();
   }
   if (ch === "-") {
-    cells[pointer].decr();
+    cells[pointer+offset].decr();
   }
   
   if (ch === ".") {
-    output += cells[pointer].ascii()
+    output += cells[pointer+offset].ascii()
     outputArea.value(output) //update screen UI
   }
   if (ch === ",") {
     if (input.length > inputPointer) {
-      cells[pointer].setValue(input.charAt(inputPointer))
+      cells[pointer+offset].setValue(input.charAt(inputPointer))
       inputPointer++;
     } else {
       loopStatus = 'wait';
@@ -30,13 +39,23 @@ function parseOp(ch) {
   
   if (ch === "[") {
     loops.push(index);
-    //WILL FIGURE OUT LOGIC
+    
+    if (cells[pointer+offset].value == 0) {
+      loopStatus = 'skip'
+      skipIndex = index
+    }
   }
   if (ch === "]") {
-    if (cells[pointer].value != 0) {
-      index = loops[loops.length-1]
+    if (loopStatus == 'skip') {
+      if (loops.pop() == skipIndex) {
+        loopStatus = 'run'
+      }
     } else {
-      loops.pop();
+      if (cells[pointer+offset].value != 0) {
+        index = loops[loops.length-1]
+      } else {
+        loops.pop();
+      }
     }
   }
 }

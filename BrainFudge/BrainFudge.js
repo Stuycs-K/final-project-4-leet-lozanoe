@@ -2,17 +2,20 @@
 const CANVAS_HEIGHT = 200;
 const MAX_CELLS = 30000;
 const INIT_CELLS = 20;
-const OPS = 20 //operations per second lol
+const OPS = 15 //operations per second lol
 
-//Brainfudge converter st
+//Brainfudge converter
 var code = []
-var index = 0
+var index;
 
 var cells = [];
-var pointer = 0;
+var pointer;
 
 var loops = []
-var loopStatus; //init, run, pause, forward, back, wait, done
+var loopStatus; //init, run, pause, forward, back, wait, skip, done
+//wait means we're waiting for input
+//skip means the loop needs to be skipped.
+var skipIndex;
 
 var output = '';
 var input = ''
@@ -27,6 +30,7 @@ var outputArea;
 
 // visuals
 var cellsX;
+var offset;
 
 //fonts
 var inconsolata
@@ -37,18 +41,22 @@ function preload() {
 
 function setup_cells(){
   index = 0
-  pointer = 0
   loopStatus = "init"
   codeInput.removeAttribute('readonly')
+  
+  //clear output
+  output = ''
+  outputArea.value(output)
   
   //reset cell stuff
   cells = []
   for (let i = 0; i < INIT_CELLS; i++) {
     cells.push(new Cell())
   }
+  
   //sets pointer to middle cell
-  pointer = floor(INIT_CELLS/2)
-
+  pointer = 0
+  offset = floor(INIT_CELLS/2);
 }
 
 function setup() {
@@ -56,12 +64,18 @@ function setup() {
   
   //make canvas
   createCanvas(windowWidth, CANVAS_HEIGHT)
-  cellsX = width/2
+  //move canvas to middle of screen
+  canvas = select('canvas')
+  canvas.position(0, 200)
   
-  //making butts
+  //making butts and inputs
   runButt = createButton("RUN");
   runButt.position(width/2-5-runButt.size().width, 160);
   runButt.mouseClicked(() => {
+    if (loopStatus != 'init') {
+      setup_cells()
+    }
+
     codeInput.attribute('readonly', true)
     code = codeInput.value().split('')
     let ok = checkInput(code)
@@ -103,11 +117,9 @@ function setup() {
   outputArea.position(width/2+25, CANVAS_HEIGHT+height+50)
   outputArea.style('font-size', '28px')
   
-  
-  //move canvas to middle of screen
-  canvas = select('canvas')
-  canvas.position(0, 200)
   setup_cells()
+  
+  cellsX = width/2
 }//setup
 
 function draw() {
@@ -133,10 +145,30 @@ function draw() {
       index++
     }
   }
+  while (loopStatus == 'skip') {
+    operator = code[index];
+    
+    //safeguard
+    if (!operator) {
+      print('wtf went wrong');
+      break;
+    }
+    
+    if (operator == '[' || operator == ']') {
+      parseOp(operator)
+    }
+    
+    index++
+  }
+  
+  //check if code end
+  if (index == code.length) {
+    loopStatus = 'done';
+    codeInput.removeAttribute('readonly')
+  }
   
   //Doing math to display cells
   renderCells();
-  
 }//draw
 
 function windowResized() {

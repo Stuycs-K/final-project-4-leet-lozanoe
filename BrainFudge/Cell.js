@@ -48,7 +48,7 @@ function Cell() {
 
 function renderCells(){
   //cell positioning
-  cellsX += (width/2 - pointer*CELL_SEPARATION - cellsX) * 0.25
+  cellsX += (width/2 - (pointer+offset)*CELL_SEPARATION - cellsX) * 0.25
   
   
   //draw all the cells but like its just *actually five* rn
@@ -59,17 +59,17 @@ function renderCells(){
     let sqx = cellsX + i*CELL_SEPARATION
         
     //cell size animation
-    if (i == pointer) {
+    if (i == pointer+offset) {
       cell.size += (CELL_SIZE * 1.25 - cell.size)*0.25
     } else {
       cell.size += (CELL_SIZE - cell.size)*0.25
     }
     
     //cell transparency animation
-    if (i == pointer) {
+    if (i == pointer+offset) {
       cell.alpha += (255 - cell.alpha)*0.25
     } else {
-      cell.alpha += (max(180 - 30*abs(i-pointer), 0) - cell.alpha)*0.25
+      cell.alpha += (max(180 - 30*abs(i-(pointer+offset)), 0) - cell.alpha)*0.25
     }
     
     //draw square
