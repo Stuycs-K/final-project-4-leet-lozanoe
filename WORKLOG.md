@@ -35,6 +35,10 @@ Implemented real-time code parsing and added UI resizing along with canvas.
 
 Added working I/O with pretty text-areas. Also restructured the main loop. Implemented simulation pause if no input is available.
 
+### 05-30-2023
+
+Implemented dynamic resizing of cells and reoganized variables and setups. Also fixed bracket functionality to match most other BF.
+
 ## Eduardo Lozano
 
 ### 05-17-2023
