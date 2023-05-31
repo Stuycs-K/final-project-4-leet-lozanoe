@@ -129,7 +129,7 @@ function draw() {
   
   //running code
   if (loopStatus == 'run') {
-    if (frameCount % (60/OPS) == 0) {
+    if (OPS > frameRate() || frameCount % (60/OPS) == 0) {
       operator = code[index];
       parseOp(operator)
 
