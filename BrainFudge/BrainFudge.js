@@ -162,7 +162,7 @@ function draw() {
   }
   
   //check if code end
-  if (index == code.length) {
+  if (loopStatus == 'run' && index == code.length) {
     loopStatus = 'done';
     codeInput.removeAttribute('readonly')
   }
