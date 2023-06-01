@@ -2,9 +2,11 @@
 const CANVAS_HEIGHT = 200;
 const MAX_CELLS = 30000;
 const INIT_CELLS = 20;
-const OPS = 5 //operations per second lol
+
 
 //Brainfudge converter
+var ops = 5 //operations per second lol
+
 var code = []
 var index;
 
@@ -56,7 +58,7 @@ function draw() {
   
   //running code
   if (loopStatus == 'run') {
-    if (OPS > frameRate() || frameCount % (60/OPS) == 0) {
+    if (frameCount % (60/ops) == 0) {
       operator = code[index];
       parseOp(operator)
 

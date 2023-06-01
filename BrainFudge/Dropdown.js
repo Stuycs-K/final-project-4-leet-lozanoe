@@ -2,13 +2,25 @@ var speedDropdown;
 
 function setupDropdowns() {
   speedDropdown = createSelect();
-  speedDropdown.option('INSTANT');
-  speedDropdown.option('10x');
-  speedDropdown.option('5x');
-  speedDropdown.option('2x');
-  speedDropdown.option('1x');
   
-  speedDropdown.selected('1x');
+  speedDropdown.option('INSTANT', 'instant');
+  speedDropdown.disable('instant')
+  
+  speedDropdown.option('10x', 60);
+  speedDropdown.option('5x', 30);
+  speedDropdown.option('2x', 12);
+  speedDropdown.option('1x', 6);
+  
+  speedDropdown.selected(6);
+  
+  speedDropdown.changed(() => {
+    if (speedDropdown.value() == 'instant') {
+      
+    } else {
+      ops = speedDropdown.value();
+      print(ops)
+    }
+  });
   
   positionDropdowns()
 }
