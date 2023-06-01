@@ -41,7 +41,8 @@ function setup() {
   canvas = select('canvas')
   canvas.position(0, 200)
   
-  setupButtons() //in Buttons tab
+  setupDropdowns() // in Dropdown tab
+  setupButtons() //in Button tab
   setupInputs() //in Input tab
   setupCells() //in Cell tab
   
@@ -112,13 +113,6 @@ function windowResized() {
   resizeCanvas(windowWidth, CANVAS_HEIGHT);
   
   positionButtons();
-
-  codeInput.size(width*6/7)
-  codeInput.position(width/2-codeInput.size().width/2, CANVAS_HEIGHT/2-(codeInput.size().height+2*15)/2) //replace 15 with first padding value
-  
-  mainInput.size((width*6/7-50)/3, 300)
-  mainInput.position(width/2-25-mainInput.size().width, CANVAS_HEIGHT+height+50)
-  
-  outputArea.size((width*6/7-50)/3, 300)
-  outputArea.position(width/2+25, CANVAS_HEIGHT+height+50)
+  positionDropdowns();
+  positionInputs();
 }//window resize
