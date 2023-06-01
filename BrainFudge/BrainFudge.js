@@ -2,7 +2,7 @@
 const CANVAS_HEIGHT = 200;
 const MAX_CELLS = 30000;
 const INIT_CELLS = 20;
-const OPS = 15 //operations per second lol
+const OPS = 5 //operations per second lol
 
 //Brainfudge converter
 var code = []
@@ -12,7 +12,7 @@ var cells = [];
 var pointer;
 
 var loops = []
-var loopStatus; //init, run, pause, forward, back, wait, skip, done
+var loopStatus; //init, run, pause, step, wait, skip, done
 //wait means we're waiting for input
 //skip means the loop needs to be skipped.
 var skipIndex;
@@ -20,13 +20,6 @@ var skipIndex;
 var output = '';
 var input = ''
 var inputPointer = 0;
-
-//UI
-var runButt;
-var exitButt;
-var codeInput;
-var mainInput;
-var outputArea;
 
 // visuals
 var cellsX;
@@ -69,6 +62,16 @@ function draw() {
       index++ //will be offset in case of 'wait' in parseOp
     }
   }
+  if (loopStatus == 'step') {
+    operator = code[index];
+    parseOp(operator)
+
+    index++
+    
+    loopStatus = 'pause'
+  }
+  
+  //input wait
   if (loopStatus == 'wait') {
     if (input.length > inputPointer) {
       operator = code[index];
@@ -78,6 +81,7 @@ function draw() {
       index++
     }
   }
+  //loop skips
   while (loopStatus == 'skip') {
     operator = code[index];
     
@@ -107,8 +111,7 @@ function draw() {
 function windowResized() {
   resizeCanvas(windowWidth, CANVAS_HEIGHT);
   
-  runButt.position(width/2-5-runButt.size().width, 160)
-  exitButt.position(width/2+5, 160);
+  positionButtons();
 
   codeInput.size(width*6/7)
   codeInput.position(width/2-codeInput.size().width/2, CANVAS_HEIGHT/2-(codeInput.size().height+2*15)/2) //replace 15 with first padding value

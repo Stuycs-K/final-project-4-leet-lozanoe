@@ -1,3 +1,7 @@
+var codeInput;
+var mainInput;
+var outputArea;
+
 function setupInputs() {
   codeInput = createInput('>++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.');
   //codeInput.attribute('placeholder', 'insert valid BrainFuck code')
