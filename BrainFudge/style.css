@@ -37,3 +37,17 @@ textarea {
 textarea:focus-visible {
   outline: none;
 }
+
+select {
+  text-align: center;
+  background-color: #402a16;
+  border: none;
+  padding: 10px 5px 10px 10px;
+  color: white;
+  font-family: inconsolata, monospace;
+}
+
+select:focus-visible {
+  outline: none;
+  border: none;
+}

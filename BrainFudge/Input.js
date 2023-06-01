@@ -5,7 +5,6 @@ var outputArea;
 function setupInputs() {
   codeInput = createInput('>++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.');
   //codeInput.attribute('placeholder', 'insert valid BrainFuck code')
-  //DO NOT change the order of these please :(
   codeInput.style('padding', '15px 20px')
   codeInput.style('font-size', '40px')
   
@@ -30,9 +29,9 @@ function positionInputs() {
   codeInput.size(width*6/7)
   codeInput.position(width/2-codeInput.size().width/2, CANVAS_HEIGHT/2-(codeInput.size().height+2*15)/2) //replace 15 with first padding value
   
-  mainInput.size((width*6/7-50)/3, 300)
+  mainInput.size((width*6/7-50)/3, windowHeight-(CANVAS_HEIGHT+height+50)-180)
   mainInput.position(width/2-25-mainInput.size().width, CANVAS_HEIGHT+height+50)
   
-  outputArea.size((width*6/7-50)/3, 300)
+  outputArea.size((width*6/7-50)/3, windowHeight-(CANVAS_HEIGHT+height+50)-180)
   outputArea.position(width/2+25, CANVAS_HEIGHT+height+50)
 }
