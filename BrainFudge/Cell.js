@@ -71,3 +71,23 @@ function renderCells(){
     }
   }
 }
+
+function setupCells(){
+  index = 0
+  loopStatus = "init"
+  codeInput.removeAttribute('readonly')
+  
+  //clear output
+  output = ''
+  outputArea.value(output)
+  
+  //reset cell stuff
+  cells = []
+  for (let i = 0; i < INIT_CELLS; i++) {
+    cells.push(new Cell())
+  }
+  
+  //sets pointer to middle cell
+  pointer = 0
+  offset = floor(INIT_CELLS/2);
+}

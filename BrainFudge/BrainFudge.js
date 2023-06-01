@@ -39,26 +39,6 @@ function preload() {
   inconsolata = loadFont('assets/Inconsolata-Regular.ttf')
 }
 
-function setup_cells(){
-  index = 0
-  loopStatus = "init"
-  codeInput.removeAttribute('readonly')
-  
-  //clear output
-  output = ''
-  outputArea.value(output)
-  
-  //reset cell stuff
-  cells = []
-  for (let i = 0; i < INIT_CELLS; i++) {
-    cells.push(new Cell())
-  }
-  
-  //sets pointer to middle cell
-  pointer = 0
-  offset = floor(INIT_CELLS/2);
-}
-
 function setup() {
   //setup is run once at the beginning of the sketch.
   
@@ -68,56 +48,9 @@ function setup() {
   canvas = select('canvas')
   canvas.position(0, 200)
   
-  //making butts and inputs
-  runButt = createButton("RUN");
-  runButt.position(width/2-5-runButt.size().width, 160);
-  runButt.mouseClicked(() => {
-    if (loopStatus != 'init') {
-      setup_cells()
-    }
-
-    codeInput.attribute('readonly', true)
-    code = codeInput.value().split('')
-    let ok = checkInput(code)
-    
-    if (ok) {
-      loopStatus = 'run'
-    } else {
-      //show error
-    }
-  });
-  
-  exitButt = createButton("EXIT");
-  exitButt.position(width/2+5, 160);
-  exitButt.mouseClicked(setup_cells);
-  
-  codeInput = createInput('>++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.');
-  //codeInput.attribute('placeholder', 'insert valid BrainFuck code')
-  //DO NOT change the order of these please :(
-  codeInput.size(width*6/7)
-  codeInput.style('padding', '15px 20px')
-  codeInput.position(width/2-codeInput.size().width/2, CANVAS_HEIGHT/2-(codeInput.size().height+2*15)/2) //replace 15 with first padding value
-  codeInput.style('font-size', '40px')
-  
-  mainInput = createElement('textarea')
-  mainInput.attribute('placeholder', 'input text')
-  mainInput.size((width*6/7-50)/3, 300)
-  mainInput.style('padding', '30px 35px')
-  mainInput.position(width/2-25-mainInput.size().width, CANVAS_HEIGHT+height+50)
-  mainInput.style('font-size', '28px')
-  mainInput.input(() => {
-    input = mainInput.value() //update vars
-  })
-  
-  outputArea = createElement('textarea')
-  outputArea.attribute('placeholder', 'output text')
-  outputArea.attribute('readonly', true)//readonly
-  outputArea.size((width*6/7-50)/3, 300)
-  outputArea.style('padding', '30px 35px')
-  outputArea.position(width/2+25, CANVAS_HEIGHT+height+50)
-  outputArea.style('font-size', '28px')
-  
-  setup_cells()
+  setupButtons() //in Buttons tab
+  setupInputs() //in Input tab
+  setupCells() //in Cell tab
   
   cellsX = width/2
 }//setup
