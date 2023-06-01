@@ -11,7 +11,7 @@ function parseOp(ch) {
   }
   if (ch === ">") {
     pointer++;
-    if (cells.length - pointer - offset > 5) {
+    if (cells.length - (pointer + offset) < 5) {
       cells.push(new Cell());
     }
   }

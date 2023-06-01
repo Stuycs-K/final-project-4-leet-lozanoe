@@ -27,14 +27,7 @@ function Cell() {
   }
   
   
-  this.display = (x) => { 
-    if (x < -this.size/2 || x > width + this.size/2) {
-      return
-    }
-    if (round(this.alpha) == 0) {
-      return
-    }
-    
+  this.display = (x) => {
     noStroke()
     fill(145, 80, 18, this.alpha)
     square(x-this.size/2, height/2-this.size/2, this.size, 15)
@@ -59,20 +52,22 @@ function renderCells(){
     let sqx = cellsX + i*CELL_SEPARATION
         
     //cell size animation
-    if (i == pointer+offset) {
-      cell.size += (CELL_SIZE * 1.25 - cell.size)*0.25
-    } else {
-      cell.size += (CELL_SIZE - cell.size)*0.25
+    if (abs(i - (pointer+offset)) < 6) {
+      if (i == pointer+offset) {
+        cell.size += (CELL_SIZE * 1.25 - cell.size)*0.25
+      } else {
+        cell.size += (CELL_SIZE - cell.size)*0.25
+      }
+      
+      //cell transparency animation
+      if (i == pointer+offset) {
+        cell.alpha += (255 - cell.alpha)*0.25
+      } else {
+        cell.alpha += (max(180 - 30*abs(i-(pointer+offset)), 0) - cell.alpha)*0.25
+      }
+      
+      //draw square
+      cell.display(sqx);
     }
-    
-    //cell transparency animation
-    if (i == pointer+offset) {
-      cell.alpha += (255 - cell.alpha)*0.25
-    } else {
-      cell.alpha += (max(180 - 30*abs(i-(pointer+offset)), 0) - cell.alpha)*0.25
-    }
-    
-    //draw square
-    cell.display(sqx);
   }
 }
