@@ -80,7 +80,7 @@ function isProblematic() {
       errorMessage = `There are ${num} excess brackets of [`;
     }
     if (num < 0){
-      errorMessage = `There are ${num} excess brackets of ]`;
+      errorMessage = `There are ${abs(num)} excess brackets of ]`;
     }
     return errorMessage
   }

@@ -47,7 +47,8 @@ function setupButtons() {
         runButt.attribute('src', 'assets/button_pause.svg')
         loopStatus = 'run'
       } else {
-        error = ok
+        error = badCode
+        print(error)
       }
     }
   });
