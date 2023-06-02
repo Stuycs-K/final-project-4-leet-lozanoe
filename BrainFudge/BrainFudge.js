@@ -23,6 +23,8 @@ var output = '';
 var input = ''
 var inputPointer = 0;
 
+var error
+
 // visuals
 var cellsX;
 var offset;
@@ -55,6 +57,12 @@ function draw() {
   //draw is run continuously throughout the program.
   background('#301c08')
   frameRate(60)
+  
+  if (loopStatus == 'init' || loopStatus == 'done') {
+    fill(255, 100)
+    textSize(20)
+    text(error, width/2+20, height-25)
+  }  
   
   //running code
   if (loopStatus == 'run') {
@@ -109,7 +117,7 @@ function draw() {
   }
   
   //check if code end
-  if (loopStatus == 'run' && index == code.length) {
+  if ((loopStatus == 'run' || loopStatus == 'pause') && index == code.length) {
     loopStatus = 'done';
     codeInput.removeAttribute('readonly')
     runButt.attribute('src', 'assets/button_play.svg')

@@ -82,7 +82,9 @@ function setupCells(){
   outputArea.value(output)
   
   inputPointer = 0;
-  
+  error = ''
+
+
   //reset cell stuff
   cells = []
   for (let i = 0; i < INIT_CELLS; i++) {

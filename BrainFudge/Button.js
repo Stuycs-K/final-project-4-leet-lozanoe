@@ -35,25 +35,38 @@ function setupButtons() {
         loopStatus = 'wait'
       }
       
-      codeInput.attribute('readonly', true)
       
-      let ok = true;
+      let badCode = false;
       if (loopStatus == 'init' || loopStatus == 'done') {
         code = codeInput.value().split('')
-        ok = isProblematic(code)
+        badCode = isProblematic(code)
       }
       
-      
-      if (!ok) {
+      if (!badCode) {
+        codeInput.attribute('readonly', true)
         runButt.attribute('src', 'assets/button_pause.svg')
         loopStatus = 'run'
-        print(input)
       } else {
-        //show error
+        error = ok
       }
     }
   });
   forwardButt.mouseClicked(() => {
+    if (loopStatus == 'init') {
+      code = codeInput.value().split('')
+      badCode = isProblematic(code)
+    
+      if (!badCode) {
+        codeInput.attribute('readonly', true)
+        runButt.attribute('src', 'assets/button_pause.svg')
+        loopStatus = 'run'
+      } else {
+        error = ok
+      }
+  
+    }
+      
+      
     if (loopStatus == 'run') { 
       runButt.attribute('src', 'assets/button_play.svg')
     }

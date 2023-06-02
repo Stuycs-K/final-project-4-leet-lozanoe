@@ -18,7 +18,6 @@ function setupDropdowns() {
       
     } else {
       ops = speedDropdown.value();
-      print(ops)
     }
   });
   

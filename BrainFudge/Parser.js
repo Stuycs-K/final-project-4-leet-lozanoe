@@ -67,8 +67,10 @@ function isProblematic() {
   for (let i = 0; i < inpString.length; i++){
     if (inpString[i] === "["){
       num++;
-    }if (inpString[i] === "]"){
+    } else if (inpString[i] === "]"){
       num--;
+    } else if (!'-+<>,.'.includes(inpString[i])) {
+      return `Uh, ${inpString[i]} is not an operator... (position ${i})`
     }
   }
   if (num === 0){
