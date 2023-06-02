@@ -15,9 +15,7 @@ function setupButtons() {
   positionButtons();
   
   exitButt.mouseClicked(() => {
-    if (loopStatus == 'run') { 
-      runButt.attribute('src', 'assets/button_play.svg')
-    }
+    runButt.attribute('src', 'assets/button_play.svg')
     
     setupCells();
   });
@@ -25,14 +23,31 @@ function setupButtons() {
     if (loopStatus == 'run') {
       runButt.attribute('src', 'assets/button_play.svg')
       loopStatus = 'pause';
+    } else if (loopStatus == 'wait') {
+      runButt.attribute('src', 'assets/button_play.svg')
+      loopStatus = 'pause-wait';
     } else {
-      codeInput.attribute('readonly', true)
-      code = codeInput.value().split('')
-      let ok = checkInput(code)
+      if (loopStatus == 'done') {
+        setupCells();
+      }
+      if (loopStatus == 'pause-wait') {
+        runButt.attribute('src', 'assets/button_pause.svg')
+        loopStatus = 'wait'
+      }
       
-      if (ok) {
+      codeInput.attribute('readonly', true)
+      
+      let ok = true;
+      if (loopStatus == 'init' || loopStatus == 'done') {
+        code = codeInput.value().split('')
+        ok = isProblematic(code)
+      }
+      
+      
+      if (!ok) {
         runButt.attribute('src', 'assets/button_pause.svg')
         loopStatus = 'run'
+        print(input)
       } else {
         //show error
       }
@@ -43,7 +58,10 @@ function setupButtons() {
       runButt.attribute('src', 'assets/button_play.svg')
     }
     
-    loopStatus = 'step';
+    if (loopStatus == 'run' || loopStatus == 'pause') {
+      loopStatus = 'step';
+    }
+    
   });
 }
 

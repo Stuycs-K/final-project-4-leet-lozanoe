@@ -60,7 +60,7 @@ function parseOp(ch) {
   }
 }
 
-function checkInput() {
+function isProblematic() {
   let num = 0
   let errorMessage = ""
   inpString = codeInput.value()
@@ -72,7 +72,7 @@ function checkInput() {
     }
   }
   if (num === 0){
-    return true;
+    return false;
   }else{
     if (num > 0){
       errorMessage = `There are ${num} excess brackets of [`;
@@ -80,6 +80,6 @@ function checkInput() {
     if (num < 0){
       errorMessage = `There are ${num} excess brackets of ]`;
     }
-    return false
+    return errorMessage
   }
 }

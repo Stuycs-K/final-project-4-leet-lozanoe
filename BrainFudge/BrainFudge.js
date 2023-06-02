@@ -84,6 +84,13 @@ function draw() {
       index++
     }
   }
+  if (loopStatus == 'wait' || loopStatus == 'pause-wait') {
+    fill(255, 100)
+    textSize(20)
+    text('waiting for input...', width/2+20, height-25)
+  }
+  
+  
   //loop skips
   while (loopStatus == 'skip') {
     operator = code[index];
@@ -105,6 +112,7 @@ function draw() {
   if (loopStatus == 'run' && index == code.length) {
     loopStatus = 'done';
     codeInput.removeAttribute('readonly')
+    runButt.attribute('src', 'assets/button_play.svg')
   }
   
   //Doing math to display cells
