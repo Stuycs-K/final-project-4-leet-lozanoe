@@ -13,7 +13,11 @@ function setupInputs() {
   mainInput.style('padding', '30px 35px')
   mainInput.style('font-size', '28px')
   mainInput.input(() => {
-    input = mainInput.value() //update vars
+    if ((loopStatus != 'init' && loopStatus != 'done' ) && mainInput.value().length < input.length) {
+      mainInput.value(input)
+    } else {
+      input = mainInput.value() //update vars
+    }
   })
   
   outputArea = createElement('textarea')
