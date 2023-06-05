@@ -43,6 +43,7 @@ function setupButtons() {
       }
       
       if (!badCode) {
+        viewPointer = 0
         codeInput.attribute('readonly', true)
         runButt.attribute('src', 'assets/button_pause.svg')
         loopStatus = 'run'
