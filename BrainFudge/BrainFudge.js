@@ -28,6 +28,7 @@ var error
 // visuals
 var cellsX;
 var offset;
+var viewPointer;
 
 //fonts
 var inconsolata
@@ -126,6 +127,81 @@ function draw() {
   //Doing math to display cells
   renderCells();
 }//draw
+
+function keyPressed() {
+  if (key == ' ' || keyCode == ENTER) {
+    if (loopStatus == 'run') {
+      runButt.attribute('src', 'assets/button_play.svg')
+      loopStatus = 'pause';
+    } else if (loopStatus == 'wait') {
+      runButt.attribute('src', 'assets/button_play.svg')
+      loopStatus = 'pause-wait';
+    } else {
+      if (loopStatus == 'done') {
+        setupCells();
+      }
+      if (loopStatus == 'pause-wait') {
+        runButt.attribute('src', 'assets/button_pause.svg')
+        loopStatus = 'wait'
+      }
+      
+      
+      let badCode = false;
+      if (loopStatus == 'init' || loopStatus == 'done') {
+        code = codeInput.value().split('')
+        badCode = isProblematic(code)
+      }
+      
+      if (!badCode) {
+        viewPointer = 0
+        codeInput.attribute('readonly', true)
+        runButt.attribute('src', 'assets/button_pause.svg')
+        loopStatus = 'run'
+      } else {
+        error = badCode
+        print(error)
+      }
+    }
+  }
+  
+  if (key == 'r') {
+    runButt.attribute('src', 'assets/button_play.svg')
+    
+    setupCells();
+  }
+  
+  if (key == 'f'){
+    if (loopStatus == 'init') {
+      code = codeInput.value().split('')
+      badCode = isProblematic(code)
+    
+      if (!badCode) {
+        codeInput.attribute('readonly', true)
+        runButt.attribute('src', 'assets/button_pause.svg')
+        loopStatus = 'run'
+      } else {
+        error = ok
+      }
+  
+    }
+      
+      
+    if (loopStatus == 'run') { 
+      runButt.attribute('src', 'assets/button_play.svg')
+    }
+    
+    if (loopStatus == 'run' || loopStatus == 'pause') {
+      loopStatus = 'step';
+    }
+  }
+  
+  if (key == 'a') {
+    viewPointer--;
+  }
+  if (key == 'd') {
+    viewPointer++;
+  }
+}
 
 function windowResized() {
   resizeCanvas(windowWidth, CANVAS_HEIGHT);
