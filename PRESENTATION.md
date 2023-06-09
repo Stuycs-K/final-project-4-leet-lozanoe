@@ -28,10 +28,10 @@ Here is where things get a little fun! This operator intializes a loop and only 
 Serves as a loop of going back to the \[ character. Only loops back if the current pointer value is not 0.
 
 ### `,`
-This is a way of getting input from the user in which the block of memories takes the character that the user inputs in. Although it really just takes the ASCII of it as a pointer value.
+This is a way of getting input from the user in which the block of memories takes the character that the user types in. Although it really just takes the ASCII of it as a pointer value.
 
 ### `.`
-This character prints the current cell the pointer is on. However, if the block is not valid ASCII, it may not be viewable to the user.
+This character prints the current cell the pointer is on. However, if the block is not readable ASCII, it may not be viewable to the user.
 
 ### Our implementation:
 We have a visualzier for brainfuck and what we have is:
@@ -40,5 +40,4 @@ We have a visualzier for brainfuck and what we have is:
 * And output box which outputs what brainfuck code you wrote
 * As well as play buttons and speed up buttons
 * Each cell loops around 255
-* 
 
