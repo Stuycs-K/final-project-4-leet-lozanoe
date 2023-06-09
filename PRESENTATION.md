@@ -22,10 +22,10 @@ Moves the pointer to the right by one.
 Moves the pointer to the left by one
 
 ### `[`
-Here is where things get a little fun! This operator intializes a loop and only begins the loop if the value is not currently equal to 0. It works like parentheses.
+Here is where things get a little fun! This operator intializes a loop and only begins the loop if the value is not currently equal to 0. The brackets nest like parentheses.
 
 ### `]`
-Serves as a loop of going back to the \[ character. Only loops back if the current pointer value is not 9.
+Serves as a loop of going back to the \[ character. Only loops back if the current pointer value is not 0.
 
 ### `,`
 This is a way of getting input from the user in which the block of memories takes the character that the user inputs in. Although it really just takes the ASCII of it as a pointer value.
