@@ -38,7 +38,8 @@ function setupButtons() {
       
       let badCode = false;
       if (loopStatus == 'init' || loopStatus == 'done') {
-        code = codeInput.value().split('')
+        code = codeInput.value().replace(/\s+/g, '')
+        print(code)
         badCode = isProblematic(code)
       }
       
@@ -55,7 +56,7 @@ function setupButtons() {
   });
   forwardButt.mouseClicked(() => {
     if (loopStatus == 'init') {
-      code = codeInput.value().split('')
+      code = codeInput.value().replace(/\s+/g, '')
       badCode = isProblematic(code)
     
       if (!badCode) {

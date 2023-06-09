@@ -3,7 +3,7 @@ var mainInput;
 var outputArea;
 
 function setupInputs() {
-  codeInput = createInput('>++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.');
+  codeInput = createInput('>+++[[>]>+++++++++++[<++++++++>-]<[<]>-]>----------------.>+++++++++++++.+++++++..+++.<----------------------------.------------.>>-.<.+++.------.--------.<+.');
   //codeInput.attribute('placeholder', 'insert valid BrainFuck code')
   codeInput.style('padding', '15px 20px')
   codeInput.style('font-size', '40px')

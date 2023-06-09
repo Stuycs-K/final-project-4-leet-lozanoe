@@ -60,10 +60,9 @@ function parseOp(ch) {
   }
 }
 
-function isProblematic() {
+function isProblematic(inpString) {
   let num = 0
   let errorMessage = ""
-  inpString = codeInput.value()
   for (let i = 0; i < inpString.length; i++){
     if (inpString[i] === "["){
       num++;
