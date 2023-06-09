@@ -36,7 +36,7 @@ This character prints the current cell the pointer is on. However, if the block 
 ### Our implementation:
 We have a visualzier for brainfuck and what we have is:
 * An input box where you can type your input
-** Other implementations sometimes let the user put in an entire string within their brainfuck code but we have it separate.
+  * Other implementations sometimes let the user put in an entire string within their brainfuck code but we have it separate.
 * And output box which outputs what brainfuck code you wrote
 * As well as play buttons and speed up buttons
 * Each cell loops around 255
